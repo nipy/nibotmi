@@ -166,7 +166,7 @@ In this case on Ubuntu
 
 * sudo useradd -m buildslave
 * sudo passwd buildslave
-* sudo apt-get install git python-dev python-numpy
+* sudo apt-get install git python-dev python-numpy python-nose
 * su - buildslave
 * mkdir -p /home/buildslave/.local/lib/python2.6/site-packages
 * easy_install --prefix=~/.local buildbot-slave
