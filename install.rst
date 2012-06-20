@@ -162,17 +162,30 @@ Open port 80 by adding the following to ``/etc/sysconfig/iptables``::
 Setting up a buildslave
 -----------------------
 
-In this case on Ubuntu
+In this case on Debian / Ubuntu::
 
-* sudo useradd -m buildslave
-* sudo passwd buildslave
-* sudo apt-get install git python-dev python-numpy python-nose python-setuptools
-* su - buildslave
-* mkdir -p /home/buildslave/.local/lib/python2.6/site-packages
-* easy_install --prefix=~/.local buildbot-slave
-* /home/buildslave/.local/bin/buildslave create-slave /home/buildslave/slave-name nipy.bic.berkeley.edu slave-name slave-password
-* Add buildslave name and password to ``nipybuildbot.py`` file on master.
-* On master : ``buildbot reconfig``
-* /home/buildslave/.local/bin/buildslave start /home/buildslave/slave-name
-* ``echo "@reboot /home/buildslave/.local/bin/buildslave start /home/buildslave/slave-name" > crontab.txt``
-* crontab crontab.txt
+    SLAVE_USER=buildlslave
+    SLAVE_NAME=my_slave
+    SLAVE_PASSWORD=some-password-not-this-one
+    PY_VER=python2.6
+
+    sudo useradd -m $SLAVE_USER
+    sudo passwd $SLAVE_USER
+    sudo apt-get install git python-dev python-numpy python-nose python-setuptools
+    su - $SLAVE_USER
+    mkdir -p /home/$SLAVE_USER/.local/lib/$PY_VER/site-packages
+    easy_install --user buildbot-slave
+    /home/$SLAVE_USER/.local/bin/buildslave create-slave /home/$SLAVE_USER/$SLAVE_NAME nipy.bic.berkeley.edu $SLAVE_NAME $SLAVE_PASSWORD
+
+On master:
+
+Add buildslave name and password to ``nipybuildbot.py`` and::
+
+    cd nibotmi
+    buildbot reconfig
+
+On the slave again::
+
+    /home/$SLAVE_USER/.local/bin/buildslave start /home/$SLAVE_USER//$SLAVE_NAME
+    ``echo "@reboot /home/$SLAVE_USER/.local/bin/buildslave start /home/$SLAVE_USER/$SLAVE_NAME" > crontab.txt``
+    crontab crontab.txt
