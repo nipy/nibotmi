@@ -186,6 +186,6 @@ Add buildslave name and password to ``nipybuildbot.py`` and::
 
 On the slave again::
 
-    /home/$SLAVE_USER/.local/bin/buildslave start /home/$SLAVE_USER//$SLAVE_NAME
+    /home/$SLAVE_USER/.local/bin/buildslave start /home/$SLAVE_USER/$SLAVE_NAME
     ``echo "@reboot /home/$SLAVE_USER/.local/bin/buildslave start /home/$SLAVE_USER/$SLAVE_NAME" > crontab.txt``
     crontab crontab.txt
