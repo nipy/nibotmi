@@ -162,6 +162,13 @@ Open port 80 by adding the following to ``/etc/sysconfig/iptables``::
 Setting up a buildslave
 -----------------------
 
+On master:
+
+Add buildslave name and password (below) to ``nipybuildbot.py`` and::
+
+    cd nibotmi
+    buildbot reconfig
+
 In this case on Debian / Ubuntu::
 
     SLAVE_USER=buildlslave
@@ -171,21 +178,15 @@ In this case on Debian / Ubuntu::
 
     sudo useradd -m $SLAVE_USER
     sudo passwd $SLAVE_USER
+    # You'll need python and git and nosetests on the path
     sudo apt-get install git python-dev python-numpy python-nose python-setuptools
     su - $SLAVE_USER
-    mkdir -p /home/$SLAVE_USER/.local/lib/$PY_VER/site-packages
-    easy_install --user buildbot-slave
-    /home/$SLAVE_USER/.local/bin/buildslave create-slave /home/$SLAVE_USER/$SLAVE_NAME nipy.bic.berkeley.edu $SLAVE_NAME $SLAVE_PASSWORD
-
-On master:
-
-Add buildslave name and password to ``nipybuildbot.py`` and::
-
-    cd nibotmi
-    buildbot reconfig
-
-On the slave again::
-
-    /home/$SLAVE_USER/.local/bin/buildslave start /home/$SLAVE_USER/$SLAVE_NAME
-    ``echo "@reboot /home/$SLAVE_USER/.local/bin/buildslave start /home/$SLAVE_USER/$SLAVE_NAME" > crontab.txt``
+    # You can do the next two lines with ``easy_install --user buildbot-slave``
+    # iff you have distribute instead of setuptools.
+    mkdir -p $HOME/.local/lib/$PY_VER/site-packages
+    # For python 2.5 (maybe 2.6, I forget) you'll need the directory above on your PYTHONPATH
+    easy_install --prefix=$HOME/.local buildbot-slave
+    $HOME/.local/bin/buildslave create-slave $HOME/$SLAVE_NAME nipy.bic.berkeley.edu $SLAVE_NAME $SLAVE_PASSWORD
+    $HOME/.local/bin/buildslave start $HOME/$SLAVE_NAME
+    echo "@reboot $HOME/.local/bin/buildslave start $HOME/$SLAVE_NAME" > crontab.txt
     crontab crontab.txt
