@@ -10,11 +10,7 @@
         <dict>
             <!-- Need local installs on the PATH - for nosetests in particular-->
             <key>PATH</key>
-            <string>
-                /Library/Frameworks/Python.framework/Versions/2.5/bin:
-                /bin:/usr/bin:/usr/sbin:/sbin:/usr/local/bin
-                /Users/buildslave/.local/bin
-            </string>
+            <string>/Library/Frameworks/Python.framework/Versions/2.5/bin:/bin:/usr/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/buildslave/.local/bin</string>
             <!-- Python 2.5 needs the local installs on the PYTHONPATH -->
             <key>PYTHONPATH</key>
             <string>/Users/buildslave/.local/lib/python2.5/site-packages</string>
