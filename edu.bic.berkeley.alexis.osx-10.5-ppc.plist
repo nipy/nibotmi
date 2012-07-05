@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd ">
+<!-- See: http://trac.buildbot.net/wiki/UsingLaunchd -->
+<plist version="1.0">
+    <dict>
+        <key>Label</key>
+        <string>edu.berkeley.bic.alexis.osx-10.5-ppc</string>
+
+        <key>EnvironmentVariables</key>
+        <dict>
+            <key>PATH</key>
+            <string>/Library/Frameworks/Python.framework/Versions/2.6/bin:/bin:/usr/bin:/usr/sbin:/sbin:/usr/local/bin</string>
+        </dict>
+
+        <!-- Change this to the user you want to run buildbot as -->
+        <key>UserName</key>
+        <string>buildslave</string>
+
+        <!-- Change this to your buildbot working directory -->
+        <key>WorkingDirectory</key>
+        <string>/Users/buildslave/osx-10.5-ppc</string>
+
+        <key>ProgramArguments</key>
+        <array>
+            <string>/Users/buildslave/Library/Python/2.7/bin/twistd</string>
+            <string>--nodaemon</string>
+            <string>--python=buildbot.tac</string>
+            <string>--logfile=buildbot.log</string>
+            <string>--prefix=slave</string>
+        </array>
+
+        <key>KeepAlive</key>
+        <dict>
+            <key>SuccessfulExit</key>
+            <false/>
+        </dict>
+
+        <key>RunAtLoad</key>
+        <true/>
+
+    </dict>
+</plist>
