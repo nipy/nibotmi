@@ -8,8 +8,13 @@
 
         <key>EnvironmentVariables</key>
         <dict>
+            <!-- Need local installs on the PATH - for nosetests in particular-->
             <key>PATH</key>
-            <string>/Library/Frameworks/Python.framework/Versions/2.6/bin:/bin:/usr/bin:/usr/sbin:/sbin:/usr/local/bin</string>
+            <string>
+                /Library/Frameworks/Python.framework/Versions/2.6/bin:
+                /bin:/usr/bin:/usr/sbin:/sbin:/usr/local/bin:
+                /Users/buildslave/.local/bin
+            </string>
         </dict>
 
         <!-- Change this to the user you want to run buildbot as -->
