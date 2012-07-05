@@ -171,7 +171,7 @@ Add buildslave name and password (below) to ``nipybuildbot.py`` and::
 
 In this case on Debian / Ubuntu::
 
-    SLAVE_USER=buildlslave
+    SLAVE_USER=buildslave
     SLAVE_NAME=my_slave
     SLAVE_PASSWORD=some-password-not-this-one
     PY_VER=python2.6
