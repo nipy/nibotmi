@@ -10,6 +10,9 @@
         <dict>
             <key>PATH</key>
             <string>/Library/Frameworks/Python.framework/Versions/2.5/bin:/bin:/usr/bin:/usr/sbin:/sbin:/usr/local/bin</string>
+            <!-- Python 2.5 needs the local installs on the PYTHONPATH -->
+            <key>PYTHONPATH</key>
+            <string>/Users/buildslave/.local/lib/python2.5/site-packages</string>
         </dict>
 
         <!-- Change this to the user you want to run buildbot as -->
