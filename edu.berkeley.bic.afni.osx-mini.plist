@@ -15,13 +15,7 @@
             <key>PYTHONPATH</key>
             <string>/Users/buildslave/.local/lib/python2.5/site-packages</string>
         </dict>
-        <!-- See http://trac.buildbot.net/ticket/1745 -->
-        <!-- We were hitting too-many-files open - for some reason -->
-        <key>SoftResourceLimits</key>
-        <dict>
-            <key>NumberOfFiles</key>
-            <integer>2048</integer>
-        </dict>
+
         <!-- Change this to the user you want to run buildbot as -->
         <key>UserName</key>
         <string>buildslave</string>
