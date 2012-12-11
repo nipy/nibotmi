@@ -4,7 +4,7 @@
 <plist version="1.0">
     <dict>
         <key>Label</key>
-        <string>edu.berkeley.bic.michael.osx-10.4-intel</string>
+        <string>edu.berkeley.bic.michael.osx-10.6</string>
 
         <key>EnvironmentVariables</key>
         <dict>
@@ -21,7 +21,7 @@
 
         <!-- Change this to your buildbot working directory -->
         <key>WorkingDirectory</key>
-        <string>/Users/buildslave/osx-10.4-intel</string>
+        <string>/Users/buildslave/osx-10.6</string>
 
         <key>ProgramArguments</key>
         <array>
