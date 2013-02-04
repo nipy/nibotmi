@@ -200,7 +200,7 @@ equivalent.
 For OSX - instructions are similar.  You will need to run the buildslave via
 launchd - see http://trac.buildbot.net/wiki/UsingLaunchd .  This involves making
 a ``.plist`` file, putting it into ``/Library/LaunchDaemons``, setting user and
-group to be ``root:wheel``, and either rebooting, or running `launchctrl load
+group to be ``root:wheel``, and either rebooting, or running `launchctl load
 <plist file>` to start the daemon.  See the example ``.plist`` files in this
 directory.  If you don't do this, and just run ``buildslave``, then the builds
 will tend to die with DNS errors.
