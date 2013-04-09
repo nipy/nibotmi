@@ -1,6 +1,11 @@
 #!/usr/bin/env python
+import os
 import sys
-if sys.platform == 'win32':
-    print('.\\Scripts\\')
+
+search_dir = os.path.abspath(sys.argv[1])
+if os.path.sep == '/':
+    print(search_dir + "/bin/")
+elif os.path.sep == '\\':
+    print(search_dir + "\\Scripts\\")
 else:
-    print('./bin/')
+    raise RuntimeError("Oh dear, funny path sep")
