@@ -20,7 +20,7 @@ def main():
     usage = """%prog [options] <command> <parameters>
 where <command> can be:
 
-path-prepend-dir
+path-prepend-str
 abspath
 pjoin
 glob
