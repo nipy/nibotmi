@@ -144,7 +144,7 @@ Enable public website
 Install mod_proxy::
 
   yum install mod_proxy_html
-  
+
 Add buildbot proxy conf in ``/etc/httpd/conf.d/buildbot.conf``::
 
   ProxyPass / http://localhost:8010/
@@ -199,8 +199,30 @@ equivalent.
 
 For OSX - instructions are similar.  You will need to run the buildslave via
 launchd - see http://trac.buildbot.net/wiki/UsingLaunchd .  This involves making
-a ``.plist`` file, putting it into ``/Library/LaunchDaemons``, setting user and
+a ``.list`` file, putting it into ``/Library/LaunchDaemons``, setting user and
 group to be ``root:wheel``, and either rebooting, or running `launchctl load
 <plist file>` to start the daemon.  See the example ``.plist`` files in this
 directory.  If you don't do this, and just run ``buildslave``, then the builds
 will tend to die with DNS errors.
+
+Giving yourself permission to trigger builds
+--------------------------------------------
+
+Ask for ssh access to the buildbot master account.
+
+ssh into that account.
+
+Then::
+
+    cd nibotmi
+    htpasswd -d -c bot_htpasswd your_chosen_username
+
+Test that you can trigger builds using this username and password on the web
+interface.
+
+Let me (Matthew) know if you do this, so I can keep a backup of that
+``bot_htpasswd`` file somewhere.
+
+Please let us know if you have any problems.
+
+.. vim: ft=rst
