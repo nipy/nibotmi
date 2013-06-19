@@ -40,6 +40,9 @@ glob
     elif command == 'glob':
         globber = os.path.join(*args)
         print('\n'.join(sorted(glob(globber))))
+    elif command == 'get-python-lib':
+        from distutils.sysconfig import get_python_lib
+        print(get_python_lib())
     else:
         parser.print_help()
         sys.exit(-1)
