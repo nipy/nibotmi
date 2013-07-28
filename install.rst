@@ -215,7 +215,7 @@ ssh into that account.
 Then::
 
     cd nibotmi
-    htpasswd -d -c bot_htpasswd your_chosen_username
+    htpasswd -d bot_htpasswd your_chosen_username
 
 Test that you can trigger builds using this username and password on the web
 interface.
