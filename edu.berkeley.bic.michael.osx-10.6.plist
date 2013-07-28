@@ -10,7 +10,7 @@
         <dict>
             <!-- Need local installs on the PATH - for nosetests in particular-->
             <key>PATH</key>
-            <string>/Library/Frameworks/Python.framework/Versions/2.7/bin:/bin:/usr/bin:/usr/sbin:/sbin:/usr/local/bin</string>
+            <string>/Library/Frameworks/Python.framework/Versions/2.7/bin:/bin:/usr/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/git/bin</string>
             <key>MACOSX_DEPLOYMENT_TARGET</key>
             <string>10.6</string>
         </dict>
