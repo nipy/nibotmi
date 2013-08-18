@@ -4,14 +4,15 @@ Create Buildbot master account
 Create buildbot user account
 ----------------------------
 
-# Password is disabled by default in Fedora/Red Hat/CentOS.
+Password is disabled by default in Fedora/Red Hat/CentOS.
 
 ::
 
   useradd buildbot
 
-# Put in public ssh key for own account and host buildbot account.
-# Note that Centos5 seems to require .ssh/authorized_keys chmod go-rwx.
+Put in public ssh key for own account and host buildbot account.
+
+Note that Centos5 seems to require .ssh/authorized_keys chmod go-rwx.
 
 ::
 
@@ -19,7 +20,7 @@ Create buildbot user account
   mkdir .ssh
   chmod go-rwx .ssh
 
-# scp your key to .ssh/authorized_keys
+scp your key to .ssh/authorized_keys
 
 ::
 
@@ -59,9 +60,10 @@ Install buildmaster
 
 Checkout buildmaster from github::
 
-  git clone http://github.com/...
+  git clone https://github.com/nipy/nibotmi
 
-Configure some gitpollers and schedulers as in
+Configure some gitpollers and schedulers as you see in the ``master.cfg`` file.
+See also
 http://onemanandafewelectrons.blogspot.com/2011/06/oh-wonderfull-build-bot.html
 
 Create buildbot service
@@ -182,11 +184,14 @@ In this case on Debian / Ubuntu::
     sudo apt-get install git python-dev python-numpy python-nose python-setuptools
     su - $SLAVE_USER
     pip install --user buildbot-slave
-    # Install virtualenv
+    # Tests need virtualenv
     pip install --user virtualenv
-    # Start up build slave
+    # Create build slave
     $HOME/.local/bin/buildslave create-slave $HOME/$SLAVE_NAME nipy.bic.berkeley.edu $SLAVE_NAME $SLAVE_PASSWORD
+    # At this point you may want to edit the `admin` and `host` files in $HOME/$SLAVE_NAME/info
+    # Start up build slave
     $HOME/.local/bin/buildslave start $HOME/$SLAVE_NAME
+    # Make sure slave starts on reboot
     echo "@reboot $HOME/.local/bin/buildslave start $HOME/$SLAVE_NAME" > crontab.txt
     crontab crontab.txt
 
@@ -195,8 +200,8 @@ For nipy tests, you'll also need scipy on your python path.  I tend to install
 numpy and scipy systemwide.
 
 For OSX - instructions are similar.  You will need to run the buildslave via
-launchd - see http://trac.buildbot.net/wiki/UsingLaunchd .  This involves making
-a ``.list`` file, putting it into ``/Library/LaunchDaemons``, setting user and
+launchd - see http://trac.buildbot.net/wiki/UsingLaunchd  This involves making
+a ``.plist`` file, putting it into ``/Library/LaunchDaemons``, setting user and
 group to be ``root:wheel``, and either rebooting, or running `launchctl load
 <plist file>` to start the daemon.  See the example ``.plist`` files in this
 directory.  If you don't do this, and just run ``buildslave``, then the builds
