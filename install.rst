@@ -181,21 +181,18 @@ In this case on Debian / Ubuntu::
     # You'll need python and git and nosetests on the path
     sudo apt-get install git python-dev python-numpy python-nose python-setuptools
     su - $SLAVE_USER
-    # You can do the next two lines with ``easy_install --user buildbot-slave``
-    # iff you have distribute instead of setuptools.
-    mkdir -p $HOME/.local/lib/$PY_VER/site-packages
-    # For python 2.5 you'll need the directory above on your PYTHONPATH
-    easy_install --prefix=$HOME/.local buildbot-slave
+    pip install --user buildbot-slave
+    # Install virtualenv
+    pip install --user virtualenv
+    # Start up build slave
     $HOME/.local/bin/buildslave create-slave $HOME/$SLAVE_NAME nipy.bic.berkeley.edu $SLAVE_NAME $SLAVE_PASSWORD
     $HOME/.local/bin/buildslave start $HOME/$SLAVE_NAME
     echo "@reboot $HOME/.local/bin/buildslave start $HOME/$SLAVE_NAME" > crontab.txt
     crontab crontab.txt
 
 For any nipy build you'll need numpy on the python path seen by the buildslave.
-You will also need nosetests on the path.  For nipy tests, you'll also need
-scipy, sympy, and nibabel on the path.  I tend to install numpy and scipy
-systemwide, and nosetests, sympy, nibabel via ``easy_install --user`` or
-equivalent.
+For nipy tests, you'll also need scipy on your python path.  I tend to install
+numpy and scipy systemwide.
 
 For OSX - instructions are similar.  You will need to run the buildslave via
 launchd - see http://trac.buildbot.net/wiki/UsingLaunchd .  This involves making
