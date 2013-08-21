@@ -37,6 +37,28 @@ Windows
 
 Windows backup, backed up to a shared SMB drive in OSX.
 
+SSH access
+==========
+
+Cywgin ssh installed on both windows machines.
+
+As I remember it, the defaults for ssh configuration worked fine.
+
+Adding a user
+=============
+
+* Make user with Windows interface
+* Make a password:
+  http://www.howtogeek.com/howto/30184/10-ways-to-generate-a-random-password-from-the-command-line/
+* Synchronize cygwin ``passwd`` with Windows::
+
+    mkpasswd -cl > /etc/passwd
+    mkgroup --local > /etc/group
+
+  http://mig5.net/content/how-update-cygwin-etcpasswd-get-all-latest-windoze-users
+* Do ``ssh newuser@localhost`` to check login
+* As ``newuser``, record temporary password
+
 On Windows 7
 ============
 
