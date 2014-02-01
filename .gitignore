@@ -2,43 +2,39 @@
 *.log
 *.pid
 *.pyc
+# Working cruft
 twistd.log*
+buildbot.tac
+changes.pck
+state.sqlite
+http.log*
+# The projects
 nipy*/
 nibabel*/
 dipy*/
 nitime*/
 nipype*/
-http.log*
+sympy*/
+regreg*/
+fail2ban*/
+pyarbus*/
+ivanov-pyarbus-master/
+pandas*/
+pydata-pandas-master/
+pyarbus-py2_6
+pymvpa*/
+PyMVPA-PyMVPA-master/
+sklearn*/
+scikit-learn-scikit-learn-master/
+statsmodels*/
+# Web directory
+public_html/
+# Stuff we processed
+bblogs/
+# Private stuff
+bot_htpasswd*
+slave_pass.py
+nipybuildbot.py
+# Other stuff
 archives/
 buildout-test*/
-public_html/
-bot_htpasswd*
-buildbot.tac
-changes.pck
-nipybuildbot.py
-slave_pass.py
-state.sqlite
-
-# On branch master
-#
-# Initial commit
-#
-# Untracked files:
-#   (use "git add <file>..." to include in what will be committed)
-#
-#	.gitignore.swp
-#	.master.cfg.swo
-#	.master.cfg.swp
-#	Makefile.sample
-#	buildbot.tac
-#	gitpoller-workdir/
-#	http.log
-#	master.cfg
-#	master.cfg.sample
-#	nibabel-py2_6/
-#	nibabel/
-#	public_html/
-#	runtests/
-#	state.sqlite
-#	twistd.log
-#	twistd.pid
