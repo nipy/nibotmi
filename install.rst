@@ -36,7 +36,7 @@ Install buildbot locally
 Add path in ``.bashrc``::
 
   # User specific aliases and functions
-  
+
   pathmunge () {
       case ":${PATH}:" in
           *:"$1":*)
@@ -49,9 +49,9 @@ Add path in ``.bashrc``::
               fi
       esac
   }
-  
+
   pathmunge ~/.local/bin
-  
+
   export PATH
   unset pathmunge
 
@@ -75,18 +75,18 @@ Create ``/etc/init.d/buildbot`` with the following content::
   #
   # chkconfig: 345 95 15
   # description: Starts and stops a buildbot master
-  
+
   PROJECT="nibotmi"
   BB_USER="buildbot"
   MASTERS_DIR="/home/buildbot"
   BASE_DIR="${MASTERS_DIR}/${PROJECT}"
   BUILDBOT="/home/buildbot/.local/bin/buildbot"
-  
+
   # Check that master.cfg exists.
   [ -f "${BASE_DIR}/master.cfg" ] || exit $?
-  
+
   RETVAL=0
-  
+
   start() {
   	printf "Starting buildbot master for %s\n" "$PROJECT"
           ACTION=start
@@ -94,7 +94,7 @@ Create ``/etc/init.d/buildbot`` with the following content::
   	RETVAL=$?
   	return $RETVAL
   }
-  
+
   stop() {
   	printf "Stopping buildbot master for %s\n" "$PROJECT"
           ACTION=stop
@@ -102,7 +102,7 @@ Create ``/etc/init.d/buildbot`` with the following content::
   	RETVAL=$?
   	return $RETVAL
   }
-  
+
   restart() {
           stop
           start
@@ -226,5 +226,62 @@ Let me (Matthew) know if you do this, so I can keep a backup of that
 ``bot_htpasswd`` file somewhere.
 
 Please let us know if you have any problems.
+
+Setting up wheelhouses on the slaves
+------------------------------------
+
+You may want to build dependencies locally on the buildslaves, so dependencies
+can be more quickly installed for tests.
+
+To do this, ssh into your buildslave account and:
+
+* Make a directory to contain your wheels::
+
+    mkdir ~/wheelhouse
+
+* Make a virtualenv to build wheels in::
+
+    virtualenv wheel-builder
+
+* Activate the virtualenv
+    . wheel-builder/bin/activate
+
+* Upgrade virtualenv to latest pip, setuptools, add wheel package
+
+    pip install -U setuptools
+    easy_install -U pip
+    pip install wheel
+
+* Build your wheels::
+
+    pip wheel --wheel-dir=/Users/buildslave/wheelhouse sympy cython
+
+Then make a file ``~/.pip/pip.conf`` with contents::
+
+    [global]
+    find-links =
+        /Users/buildslave/wheelhouse
+    use-wheel = True
+
+where ``/Users/buildslave/wheelhouse`` is the full path to your wheelhouse
+directory.
+
+After that, you should see builders on that slave pick up the wheels for their
+dependencies, as long as you have compiled the right versions for the right
+pythons.
+
+If you are testing on more than one Python version, and your wheels are specific
+to python versions, then make a virtualenv corresponding to all your python
+versions::
+
+  cd ~
+  virtualenv --python=python3.3 wheel-builder-3.3
+  . wheel-builder-3.3/bin/activate
+  easy_install -U pip
+  pip install -U setuptools
+  pip install wheel
+  pip wheel --wheel-dir=/Users/buildslave/wheelhouse sympy cython
+
+and so on.
 
 .. vim: ft=rst
