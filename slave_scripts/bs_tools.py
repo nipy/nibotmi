@@ -24,6 +24,8 @@ path-prepend-str
 abspath
 pjoin
 glob
+get-python-lib
+get-url
 """
     parser = OptionParser(usage)
     opts, args = parser.parse_args()
@@ -43,6 +45,12 @@ glob
     elif command == 'get-python-lib':
         from distutils.sysconfig import get_python_lib
         print(get_python_lib())
+    elif command == 'get-url':
+        try:
+            from urllib import urlretrieve
+        except ImportError: # Python 4
+            from urllib.request import urlretrieve
+        urlretrieve(*args)
     else:
         parser.print_help()
         sys.exit(-1)
