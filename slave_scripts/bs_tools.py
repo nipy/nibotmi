@@ -26,6 +26,7 @@ pjoin
 glob
 get-python-lib
 get-url
+get-tail
 """
     parser = OptionParser(usage)
     opts, args = parser.parse_args()
@@ -51,6 +52,8 @@ get-url
         except ImportError: # Python 4
             from urllib.request import urlretrieve
         urlretrieve(*args)
+    elif command == 'get-tail':
+        print(os.path.split(args[0])[1])
     else:
         parser.print_help()
         sys.exit(-1)
