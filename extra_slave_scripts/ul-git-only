@@ -1,0 +1,25 @@
+#!/bin/bash
+# Reset /usr/local to git only
+#
+# This is the extreme situation where /usr/local is nuked back to a known state
+#
+# Preparation is:
+# Download and install git from dmg file (goes into /usr/local/git)
+# cd /usr/local
+# mkdir Python.framework
+# touch Python.framework/.gitignore
+# git init
+# git add .
+# git commit -m "Git only"
+# # add this file and install_python.py file
+# # make sure they are only writeable by root
+# git commit -m "Add installation scripts"
+# git tag git-only
+#
+# Make sure Python.framework stuff appears in /usr/local
+# ln -s $PWD/Python.framework /Library/Frameworks
+#
+# Now /usr/local contains anything installed by the Python.org installers
+cd /usr/local
+sudo git reset --hard git-only
+sudo git clean -fxd
