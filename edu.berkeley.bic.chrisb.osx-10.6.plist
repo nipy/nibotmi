@@ -10,7 +10,7 @@
         <dict>
             <!-- Need local installs on the PATH - for nosetests in particular-->
             <key>PATH</key>
-            <string>/bin:/usr/bin:/usr/sbin:/sbin:/usr/local/bin</string>
+            <string>/bin:/usr/bin:/usr/sbin:/sbin:/usr/local/git/bin:/usr/local/bin</string>
             <key>MACOSX_DEPLOYMENT_TARGET</key>
             <string>10.6</string>
         </dict>
