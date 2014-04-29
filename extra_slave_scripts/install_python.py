@@ -104,13 +104,11 @@ def main():
     # Install python and some packages
     py_bin = install_python_org(py_version)
     pip_bin = install_pip(py_bin)
-    check_call([pip_bin, 'install', 'nose'])
     check_call([pip_bin, 'install', 'virtualenv'])
     link_force(py_bin, '/usr/local/bin/python')
     link_force(pip_bin, '/usr/local/bin/pip')
     bin_dir = dirname(py_bin)
     link_force(pjoin(bin_dir, 'virtualenv'), '/usr/local/bin/virtualenv')
-    link_force(pjoin(bin_dir, 'nosetests'), '/usr/local/bin/nosetests')
 
 
 if __name__ == '__main__':
