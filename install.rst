@@ -264,7 +264,9 @@ Then make a file ``~/.pip/pip.conf`` with contents::
     use-wheel = True
 
 where ``/Users/buildslave/wheelhouse`` is the full path to your wheelhouse
-directory.
+directory.  The file will be something like ``C:\Users\buildslave\pip\pip.ini``
+on Windows - see `pip config file
+<http://pip.readthedocs.org/en/latest/user_guide.html#config-file>`_
 
 After that, you should see builders on that slave pick up the wheels for their
 dependencies, as long as you have compiled the right versions for the right
