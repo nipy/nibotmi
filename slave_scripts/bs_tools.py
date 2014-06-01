@@ -49,7 +49,7 @@ get-tail
     elif command == 'get-url':
         try:
             from urllib import urlretrieve
-        except ImportError: # Python 4
+        except ImportError: # Python 3
             from urllib.request import urlretrieve
         urlretrieve(*args)
     elif command == 'get-tail':
