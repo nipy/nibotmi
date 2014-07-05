@@ -1,0 +1,13 @@
+# pip requirements file for scipy statistics and data stack
+#
+# Installs scipy-stack and other useful analysis libraries
+#
+# use with `pip install -r scipy-stats-data-1.0.txt`
+-f https://nipy.bic.berkeley.edu/scipy_installers
+-r https://nipy.bic.berkeley.edu/scipy_installers/scipy-stack-1.0-plus.txt
+scikit-learn
+scikit-image
+patsy
+statsmodels
+h5py
+Pillow

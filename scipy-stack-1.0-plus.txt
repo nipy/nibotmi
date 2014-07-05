@@ -1,0 +1,22 @@
+# pip requirements file for scipy stack 1.0
+# http://www.scipy.org/stackspec.html
+#
+# use with `pip install -r scipy-stack-1.0.txt`
+# pip requirement is not part of scipy-stack, but makes it possible to use OSX
+# wheels
+# numexpr is not part of scipy-stack but gives extra speed for pandas
+# ipython[test] is not part of the scipy-stack but allows us to test ipython
+-f https://nipy.bic.berkeley.edu/scipy_installers
+pip>=1.5.4
+numpy>=1.6
+scipy>=0.10
+pytz
+tornado
+python-dateutil
+matplotlib>=1.1
+pyzmq
+ipython[notebook,test]>=0.13
+numexpr
+pandas>=0.8
+sympy>=0.7
+nose>=1.1
