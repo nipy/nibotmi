@@ -1,0 +1,5 @@
+# robust pip requirements file for scipy stats data 1.0
+# See included requirements file for details
+# This file makes the installation less error prone by disabling pypi indices
+--no-indexes
+-r https://nipy.bic.berkeley.edu/scipy_installers/scipy-stats-data-1.0.txt
