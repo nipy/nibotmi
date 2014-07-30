@@ -286,4 +286,13 @@ versions::
 
 and so on.
 
+Debugginng by running the buildbot master locally
+-------------------------------------------------
+
+Don't worry about futzing on the server if you need to, but another way of
+working stuff out is to set up a model system on your own machine.
+
+See the directory ``test-rig`` and the ``README.rst`` file in that directory
+for some instructions.
+
 .. vim: ft=rst
