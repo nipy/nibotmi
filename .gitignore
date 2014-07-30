@@ -14,19 +14,18 @@ nibabel*/
 dipy*/
 nitime*/
 nipype*/
-sympy*/
-regreg*/
-fail2ban*/
-pyarbus*/
-ivanov-pyarbus-master/
+numpy-*/
 pandas*/
-pydata-pandas-master/
-pyarbus-py2_6
+pyarbus*/
 pymvpa*/
-PyMVPA-PyMVPA-master/
+regreg*/
+scipy-*/
+seaborn-*/
 sklearn*/
-scikit-learn-scikit-learn-master/
 statsmodels*/
+sympy*/
+fail2ban*/
+*-master/
 # Web directory
 public_html/
 # Stuff we processed
