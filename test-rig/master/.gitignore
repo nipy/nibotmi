@@ -1,0 +1,7 @@
+master.cfg.sample
+templates/
+*-master/
+numpy-*
+scipy-*
+seaborn-*
+secret_passwords.py

@@ -34,6 +34,7 @@ bblogs/
 # Private stuff
 bot_htpasswd*
 slave_pass.py
+secret_passwords.py
 nipybuildbot.py
 # Other stuff
 archives/
