@@ -66,6 +66,18 @@ Configure some gitpollers and schedulers as you see in the ``master.cfg`` file.
 See also
 http://onemanandafewelectrons.blogspot.com/2011/06/oh-wonderfull-build-bot.html
 
+Make directories for try scheduler
+----------------------------------
+
+See : http://docs.buildbot.net/latest/full.html#sched-Try_Jobdir
+
+::
+
+    mkdir -p jodbdir jobdir/new jobdir/cur jobdir/tmp
+
+This enables the ``jobdir`` scheduler for anyone who can ssh into the master
+account machine.
+
 Create buildbot service
 -----------------------
 
