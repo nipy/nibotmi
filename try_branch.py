@@ -1,17 +1,18 @@
 #!/usr/bin/env python
 """ Push code from a branch for testing on the nipy buildbots
 
-You will need ssh access to the buildbot machine
+You will need ssh access to the buildbot machine.
 
-Here's doing the code push long-hand::
-    git diff main-master | buildbot try -p 1 --diff=- -c ssh -u buildbot -b
-    dipy-py2.7-osx-10.8 --host=nipy.bic.berkeley.edu
-    --jobdir=~buildbot/nibotmi/jobdir --branch=master
-    --repository=git://github.com/nipy/dipy.git -p 1
+Use with something like::
+
+    cd ~/repos/dipy
+    git checkout my-interesting-branch
+    try_branch.py dipy-py2.7-win32
+
 """
 from __future__ import print_function
 
-from subprocess import check_output, Popen, PIPE
+from subprocess import check_output
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 try:
     from urlparse import urlparse
@@ -34,9 +35,9 @@ def get_parser():
 """ Push code from current branch to buildbot for testing
 
 * Work out upstream remote
-* Fetch upstream remote to fetch upstream/master
-* Calculate diff against upstream/master
-* Push to buildbot via ssh
+* Fetch upstream remote in order to fetch <upstream>/master
+* Calculate diff against <upstream>/master
+* Push diff to buildbot via ssh
 """,
         formatter_class=RawDescriptionHelpFormatter)
     parser.add_argument('builder_names', type=str, help='name of builder',
@@ -49,6 +50,13 @@ def get_parser():
                         default=BUILDBOT_JOBDIR)
     parser.add_argument('--branch', type=str, help='upstream branch name',
                         default='master')
+    parser.add_argument('--patch-filename', type=str,
+                        help='written patch filename',
+                        default='.buildbot.patch')
+    parser.add_argument('--git-org', type=str,
+                        help='organization containing git repo',
+                        default='nipy')
+
     return parser
 
 
@@ -56,8 +64,10 @@ def bt(cmd):
     return check_output(cmd).decode('latin1').strip()
 
 
-def find_upstream(git_org='nipy', git_host='github.com'):
+def find_upstream(git_org, git_host='github.com'):
     """ Find remote that is probably upstream
+
+    Return name, ``git://`` form of URL of repo, or raise error if not found
     """
     for remote in bt(['git', 'remote', '-v']).splitlines():
         name, url, type = remote.strip().split()
@@ -86,24 +96,22 @@ def main():
     # parse the command line
     parser = get_parser()
     args = parser.parse_args()
-    upstream, git_url = find_upstream()
+    upstream, git_url = find_upstream(args.git_org)
     bt(['git', 'fetch', upstream])
     diff = check_output(['git', 'diff', '{0}/{1}..'.format(
         upstream, args.branch)])
-    proc = Popen(['buildbot', 'try', '-p', '1', '--diff=-',
-                  '-c', 'ssh',
-                  '-u', args.user,
-                  '--host', args.host,
-                  '--jobdir=' + args.jobdir,
-                  '--repository=' + git_url,
-                  '--branch=' + args.branch] +
-                 ['--builder=' + builder for builder in args.builder_names],
-                 stdin=PIPE, stdout=PIPE, stderr=PIPE)
-    stdout, stderr = proc.communicate(diff)
-    print(stdout.decode('latin1'))
-    if proc.returncode != 0:
-        raise RuntimeError("buildbot try failed with error " +
-                           stderr.decode('latin1'))
+    with open(args.patch_filename, 'wb') as fobj:
+        fobj.write(diff)
+    print(bt(['buildbot', 'try',
+              '--diff=' + args.patch_filename,
+              '--patchlevel=1',
+              '--connect=ssh',
+              '--username=' + args.user,
+              '--host=' + args.host,
+              '--jobdir=' + args.jobdir,
+              '--repository=' + git_url,
+              '--branch=' + args.branch] +
+             ['--builder=' + builder for builder in args.builder_names]))
 
 
 if __name__ == '__main__':
