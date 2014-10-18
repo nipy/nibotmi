@@ -98,8 +98,9 @@ def main():
     args = parser.parse_args()
     upstream, git_url = find_upstream(args.git_org)
     bt(['git', 'fetch', upstream])
-    diff = check_output(['git', 'diff', '{0}/{1}..'.format(
-        upstream, args.branch)])
+    diff = check_output(['git', 'diff', '--binary',
+                         '{0}/{1}..'.format(
+                             upstream, args.branch)])
     with open(args.patch_filename, 'wb') as fobj:
         fobj.write(diff)
     print(bt(['buildbot', 'try',
