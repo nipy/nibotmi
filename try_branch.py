@@ -93,6 +93,11 @@ def find_upstream(git_org, git_host='github.com'):
 
 
 def main():
+    # Check buildbot command is available
+    try:
+        bt(['buildbot', '--version'])
+    except OSError:
+        raise RuntimeError('Cannot run buildbot command - is it installed?')
     # parse the command line
     parser = get_parser()
     args = parser.parse_args()
