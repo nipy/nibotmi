@@ -219,6 +219,14 @@ group to be ``root:wheel``, and either rebooting, or running `launchctl load
 directory.  If you don't do this, and just run ``buildslave``, then the builds
 will tend to die with DNS errors.
 
+Yosemite (OSX 10.10) seems to have introduced a new bug in passing the PATH to
+launchd scripts - see `this stackoverflow question
+<http://stackoverflow.com/questions/26439491/cannot-set-launchctl-enviroment-variables-in-yosemite-path-for-apache>`_.
+
+As a workaround, I put the required path in a script that starts the buildbot
+daemon - see ``run_buildslave.sh`` in this repo, and
+``edu.berkeley.bic.kerbin.osx-10.8.plist`` for example use.
+
 Giving yourself permission to trigger builds
 --------------------------------------------
 

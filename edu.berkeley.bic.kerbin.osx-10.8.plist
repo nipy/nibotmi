@@ -10,7 +10,7 @@
         <dict>
             <!-- Need local installs on the PATH - for nosetests in particular-->
             <key>PATH</key>
-            <string>/Library/Frameworks/Python.framework/Versions/2.7/bin:/bin:/usr/bin:/usr/sbin:/sbin:/usr/local/bin</string>
+            <string>/Library/Frameworks/Python.framework/Versions/2.7/bin:/bin:/usr/bin:/usr/sbin:/sbin:/Users/buildslave/Library/Python/2.7/bin:/usr/local/bin</string>
             <key>MACOSX_DEPLOYMENT_TARGET</key>
             <string>10.6</string>
         </dict>
@@ -25,11 +25,7 @@
 
         <key>ProgramArguments</key>
         <array>
-            <string>/Users/buildslave/Library/Python/2.7/bin/twistd</string>
-            <string>--nodaemon</string>
-            <string>--python=buildbot.tac</string>
-            <string>--logfile=buildbot.log</string>
-            <string>--prefix=slave</string>
+            <string>/Users/buildslave/usr/bin/run_buildslave.sh</string>
         </array>
 
         <key>KeepAlive</key>
