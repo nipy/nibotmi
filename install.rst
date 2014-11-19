@@ -315,4 +315,50 @@ working stuff out is to set up a model system on your own machine.
 See the directory ``test-rig`` and the ``README.rst`` file in that directory
 for some instructions.
 
+Trying a set of changes on the buildbots
+----------------------------------------
+
+Sometimes you may need to try running a set of changes on a specific buildbot
+machine, or set of machines, but without committing to the main repo that the
+buildbots are testing.
+
+This is the role of the ``try_branch.py`` script in this repository.
+
+The procedure is:
+
+* Get ssh access to the buildbot server / user.  Ask me or on ask the nipy
+  mailing list;
+* Download the ``try_branch.py`` file, make it executable, put it on your
+  path;
+* Look at the buildbot builders page at http://nipy.bic.berkeley.edu/builders
+  to get the name of the builder or builders you want to run;
+* Change directory to the repo you want to run the changes for, e.g. ``cd
+  repos/dipy``;
+* Checkout the branch you want to test.  Edit any files you want to edit;
+* If you are working on a ``nipy`` project like nibabel, dipy, nipy, then you
+  can just do something like::
+
+    try_branch.py dipy-py2.7-win32 dipy-py2.6-osx-10.5-ppc
+
+  where ``dipy-py2.7-win32 dipy-py2.6-osx-10.5-ppc`` are the names of two
+  builders you want to run these changes on;
+* If you are not working on a ``nipy`` project, specify the name of the
+  canonical Github organization for the repo with something like::
+
+    try_branch.py --git-org=fail2ban fail2ban-py2.7-osx-10.8_0.8
+
+* You should now be able to see your new build running via the buildbot web
+  interface.  Sometimes the builds cause odd errors in the buildbot web
+  interface as in this buildbot ticket - http://trac.buildbot.net/ticket/2873
+  Wait for enough time to be sure the build has finished and then see if the
+  interface rights itself, otherwise you may have to stop and start the
+  buildbot server with::
+
+    ssh buildbot@nipy.bic.berkeley.edu
+    cd nibotmi
+    buildbot stop
+    buildbot start
+
+  If that doesn't work, let me or the mailing list know.
+
 .. vim: ft=rst
