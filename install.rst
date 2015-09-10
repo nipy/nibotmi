@@ -12,7 +12,7 @@ Password is disabled by default in Fedora/Red Hat/CentOS.
 
 Put in public ssh key for own account and host buildbot account.
 
-Note that Centos5 seems to require .ssh/authorized_keys chmod go-rwx.
+Note that CentOS5 seems to require .ssh/authorized_keys chmod go-rwx.
 
 ::
 
@@ -31,7 +31,7 @@ Install buildbot locally
 
 ::
 
-  easy_install --prefix=~/.local -U buildbot
+  pip install --user -U buildbot
 
 Add path in ``.bashrc``::
 
@@ -194,10 +194,10 @@ In this case on Debian / Ubuntu::
     sudo passwd $SLAVE_USER
     # You'll need python and git and nosetests on the path
     sudo apt-get install git python-dev python-numpy python-nose python-setuptools
+    # Tests need virtualenv, it's easiest to install this system-wide
+    pip install virtualenv
     su - $SLAVE_USER
     pip install --user buildbot-slave
-    # Tests need virtualenv
-    pip install --user virtualenv
     # Create build slave
     $HOME/.local/bin/buildslave create-slave $HOME/$SLAVE_NAME nipy.bic.berkeley.edu $SLAVE_NAME $SLAVE_PASSWORD
     # At this point you may want to edit the `admin` and `host` files in $HOME/$SLAVE_NAME/info
@@ -263,13 +263,13 @@ To do this, ssh into your buildslave account and:
 
     virtualenv wheel-builder
 
-* Activate the virtualenv
+* Activate the virtualenv::
+
     . wheel-builder/bin/activate
 
-* Upgrade virtualenv to latest pip, setuptools, add wheel package
+* Upgrade virtualenv to latest pip, setuptools, add wheel package::
 
-    pip install -U setuptools
-    easy_install -U pip
+    pip install -U pip
     pip install wheel
 
 * Build your wheels::
