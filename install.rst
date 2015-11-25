@@ -1,6 +1,17 @@
 Create Buildbot master account
 ==============================
 
+See : http://buildbot.net/#/basics
+
+A *slave* is the same as a buildslave.  These are the machines that run the
+builds and report back with results.
+
+A *master* is a process that controls the slaves.  It polls for changes that
+should trigger a build, and then sends these changes to the buildslaves to run
+the build.
+
+Please see the main buildbot documentation for more detail.
+
 Create buildbot user account
 ----------------------------
 
@@ -178,7 +189,7 @@ Setting up a buildslave
 
 On master:
 
-Add buildslave name and password (below) to ``nipybuildbot.py`` and::
+Add buildslave name and password (below) to ``secret_passwords.py`` and::
 
     cd nibotmi
     buildbot reconfig
