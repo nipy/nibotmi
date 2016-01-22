@@ -88,8 +88,8 @@ Firewall
 We're running CentOS 7 on nipy.bic.berkeley.edu.
 
 From `this SO answer
-<http://stackoverflow.com/questions/24729024/centos-7-open-firewall-port>`_
-I ran commands::
+<http://stackoverflow.com/questions/24729024/centos-7-open-firewall-port>`_ and
+the `Fedora wiki <https://fedoraproject.org/wiki/FirewallD>`_ I ran commands::
 
     firewall-cmd --zone=public --add-port=54856/tcp --permanent
     firewall-cmd --reload
