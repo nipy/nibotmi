@@ -151,3 +151,10 @@ I had previously tried running this as a `user systemd
 <https://wiki.archlinux.org/index.php/Systemd/User>`_ service but ran into
 trouble configuring the startup, with DBus errors trying to enable or start the
 service.
+
+**********
+Using homu
+**********
+
+The homu command starts a webserver that listens on the homu port, and return
+details of what it's up to: http://nipy.bic.berkeley.edu:54856
