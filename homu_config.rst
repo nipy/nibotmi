@@ -2,11 +2,14 @@
 Installing a homu bot
 #####################
 
-Following `homu instructions <https://github.com/barosl/homu>`_.
+This page has some more detailed explanations arising from following the `homu
+installation instructions <https://github.com/barosl/homu>`_.
 
-Some background at http://homu.io
+The page at http://homu.io describes a hosted homu service with some
+background on the homu command.
 
-I'm going to be running the homu service on ``nipy.bic.berkeley.edu``.
+Here I'm describing the procedure for running another homu service on
+``nipy.bic.berkeley.edu``.
 
 **********************************
 Create github account for homu bot
@@ -20,10 +23,10 @@ free account but I contacted Github support, and they told me that "When needed
 for legitimate purposes, we can allow users up to one (1) extra account as
 a "machine" account for automation needs."
 
-Although the `homu instructions`_ point out you can use an existing user, the
-homu code specifically checks if the logged-in github user from a particular
-pull request is the same as the homu user, so you shouldn't use your normal
-github login user as the homu user.
+Although the `homu installation instructions`_ point out you can use an
+existing user, the homu code specifically checks if the logged-in github user
+from a particular pull request is the same as the homu user, so you shouldn't
+use your normal github login user as the homu user.
 
 ***************************
 Register github application
@@ -156,5 +159,6 @@ service.
 Using homu
 **********
 
-The homu command starts a webserver that listens on the homu port, and return
-details of what it's up to: http://nipy.bic.berkeley.edu:54856
+The homu command starts a webserver that listens on the homu port, and returns
+some details of what it's up to, as well as a cheat sheet of valid commands:
+http://nipy.bic.berkeley.edu:54856
