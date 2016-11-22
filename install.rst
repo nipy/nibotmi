@@ -215,28 +215,33 @@ In this case on Debian / Ubuntu::
     # Start up build slave
     $HOME/.local/bin/buildslave start $HOME/$SLAVE_NAME
     # Make sure slave starts on reboot
-    echo "@reboot $HOME/.local/bin/buildslave start $HOME/$SLAVE_NAME" > crontab.txt
+    cat > crontab.txt << EOF
+    PATH=$HOME/.local/bin:/usr/local/bin:/bin
+    @reboot $HOME/.local/bin/buildslave start $HOME/$SLAVE_NAME
+    EOF
     crontab crontab.txt
 
 For any nipy build you'll need numpy on the python path seen by the buildslave.
 For nipy tests, you'll also need scipy on your python path.  I tend to install
-numpy and scipy systemwide.
+numpy and scipy system-wide.
 
 For OSX - instructions are similar.  You will need to run the buildslave via
-launchd - see http://trac.buildbot.net/wiki/UsingLaunchd  This involves making
-a ``.plist`` file, putting it into ``/Library/LaunchDaemons``, setting user and
-group to be ``root:wheel``, and either rebooting, or running `launchctl load
-<plist file>` to start the daemon.  See the example ``.plist`` files in this
-directory.  If you don't do this, and just run ``buildslave``, then the builds
-will tend to die with DNS errors.
+launchd - see http://trac.buildbot.net/wiki/UsingLaunchd.  This involves
+making a ``.plist`` file, putting it into ``/Library/LaunchDaemons``, setting
+user and group to be ``root:wheel``, and either rebooting, or running
+`launchctl load <plist file>` to start the daemon.  See the example ``.plist``
+files in this directory.  If you don't do this, and just run ``buildslave``,
+then the builds will tend to die with DNS errors.
 
-Yosemite (OSX 10.10) seems to have introduced a new bug in passing the PATH to
-launchd scripts - see `this stackoverflow question
+At one point, Yosemite (OSX 10.10) seems to have introduced a new bug in
+passing the PATH to launchd scripts - see `this stackoverflow question
 <http://stackoverflow.com/questions/26439491/cannot-set-launchctl-enviroment-variables-in-yosemite-path-for-apache>`_.
 
 As a workaround, I put the required path in a script that starts the buildbot
 daemon - see ``run_buildslave.sh`` in this repo, and
 ``edu.berkeley.bic.kerbin.osx-10.8.plist`` for example use.
+
+I believe this bug has been fixed in more recent versions of OSX.
 
 Giving yourself permission to trigger builds
 --------------------------------------------
